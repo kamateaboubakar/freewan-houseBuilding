@@ -146,6 +146,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>lebedoo-housebuidling</finalName>
     </build>
 
 </project>
