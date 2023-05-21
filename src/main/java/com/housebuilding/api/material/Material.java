@@ -1,5 +1,6 @@
 package com.housebuilding.api.material;
 
+import com.housebuilding.api.brand.Brand;
 import com.housebuilding.api.category.Category;
 import com.housebuilding.api.supplier.Supplier;
 import com.housebuilding.api.unit.Unit;
@@ -32,6 +33,10 @@ public class Material {
     @Column(name = "material_id", nullable = false)
     private Long materialId;
 
+    @ManyToOne
+    @JoinColumn(name = "brand_id")
+    private Brand brand;
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
@@ -52,6 +57,9 @@ public class Material {
     @ManyToOne(optional = false)
     @JoinColumn(name = "unit_id", nullable = false)
     private Unit unit;
+
+    @Column(name = "image_url", length = 2000)
+    private String imageUrl;
 
     public Material(Long materialId) {
         this.materialId = materialId;

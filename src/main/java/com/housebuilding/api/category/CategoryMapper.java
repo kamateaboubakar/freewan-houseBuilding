@@ -14,6 +14,7 @@ import java.util.List;
 public interface CategoryMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(source = "parentCategoryId", target = "parent.categoryId")
+    @Mapping(target = "categoryId", ignore = true)
     Category toEntity(CategoryDto categoryDto);
 
     @Mapping(source = "parent.categoryId", target = "parentCategoryId")

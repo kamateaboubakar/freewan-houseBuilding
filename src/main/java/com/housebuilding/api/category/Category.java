@@ -47,6 +47,9 @@ public class Category {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "image_url", length = 2000)
+    private String imageUrl;
+
     @OneToMany(mappedBy = "parent", cascade = CascadeType.PERSIST)
     private List<Category> children = new ArrayList<>();
 

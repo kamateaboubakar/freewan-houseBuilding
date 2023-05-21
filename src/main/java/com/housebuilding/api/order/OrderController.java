@@ -1,5 +1,6 @@
 package com.housebuilding.api.order;
 
+import com.housebuilding.api.common.http.ApiResponseCode;
 import com.housebuilding.api.exception.ApplicationException;
 import com.housebuilding.api.material.MaterialService;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ import static com.housebuilding.api.Route.V1_URI;
 @RestController
 @RequestMapping(ROOT + V1_URI + ORDER)
 @RequiredArgsConstructor
+@Transactional
 public class OrderController {
     private final OrderService orderService;
     private final OrderMapper orderMapper;
@@ -28,7 +30,6 @@ public class OrderController {
     private final MaterialService materialService;
 
     @GetMapping("")
-    @Transactional
     public List<OrderDto> findAllOrders() {
         return orderMapper.toDtos(orderService.findAll());
     }
@@ -45,10 +46,12 @@ public class OrderController {
 
 
     @PostMapping("")
-    public OrderDto addNewOrder(@RequestBody OrderRequest request) {
+    public OrderApiResponse addNewOrder(@RequestBody OrderRequest request) {
         Order material = orderMapper.toEntity(request);
         material.getOrderItems().forEach(orderItem -> materialService.findById(orderItem.getMaterial().getMaterialId()));
-        return orderMapper.toDto(orderService.save(material));
+        Order savedOrder = orderService.save(material);
+
+        return new OrderApiResponse(ApiResponseCode.SUCCESS, "Order created with success", savedOrder.getId().toString());
     }
 
     @PostMapping("/{orderId}/cancel")

@@ -43,7 +43,7 @@ public class BrandController {
 
     @PutMapping("")
     public Brand updateBrand(@RequestBody BrandDto brandDto) {
-        Brand brand = brandService.findById(brandDto.brandId());
+        Brand brand = brandService.findById(brandDto.getBrandId());
         return brandService.save(brandMapper.partialUpdate(brandDto, brand));
     }
 

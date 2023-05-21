@@ -7,9 +7,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "brand")
+@Getter
+@Setter
 public class Brand {
     @Id
     @SequenceGenerator(name = "brand_seq", sequenceName = "brand_seq")

@@ -14,7 +14,9 @@ import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
 public interface MaterialMapper {
+    @Mapping(target = "materialId", ignore = true)
     @Mapping(source = "unitId", target = "unit.unitId")
+    @Mapping(source = "brandId", target = "brand.brandId")
     @Mapping(source = "supplierId", target = "supplier.supplierId")
     @Mapping(source = "categoryId", target = "category.categoryId")
     Material toEntity(MaterialDto materialDto);
