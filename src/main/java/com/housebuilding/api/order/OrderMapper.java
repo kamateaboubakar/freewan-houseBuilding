@@ -11,10 +11,8 @@ import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING, uses = {PaymentDetailMapper.class, OrderItemMapper.class})
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING, uses = {PaymentDetailMapper.class, OrderItemMapper.class, OrderMapperResolver.class})
 public interface OrderMapper {
-    Order toEntity(OrderDto orderDto);
-
     OrderDto toDto(Order order);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
@@ -26,4 +24,6 @@ public interface OrderMapper {
     }
 
     List<OrderDto> toDtos(List<Order> all);
+
+    Order toEntity(OrderRequest request);
 }

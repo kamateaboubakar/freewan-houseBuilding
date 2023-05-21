@@ -15,10 +15,17 @@ public interface OrderItemMapper {
     @Mapping(source = "materialPrice", target = "material.price")
     @Mapping(source = "materialDescription", target = "material.description")
     @Mapping(source = "materialName", target = "material.name")
-    @Mapping(source = "materialMaterialId", target = "material.materialId")
+    @Mapping(source = "materialId", target = "material.materialId")
     OrderItem toEntity(OrderItemDto orderItemDto);
 
+    @Mapping(source = "materialId", target = "material.materialId")
+    OrderItem toEntity(OrderItemForm form);
+
     @InheritInverseConfiguration(name = "toEntity")
+    @Mapping(target = "materialPrice", source = "material.price")
+    @Mapping(target = "materialDescription", source = "material.description")
+    @Mapping(target = "materialName", source = "material.name")
+    @Mapping(target = "materialUnit", source = "material.unit")
     OrderItemDto toDto(OrderItem orderItem);
 
     @InheritConfiguration(name = "toEntity")

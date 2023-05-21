@@ -1,7 +1,10 @@
 package com.housebuilding.api.order;
 
 import com.housebuilding.api.Route;
+import com.housebuilding.api.exception.ApplicationException;
+import com.housebuilding.api.material.MaterialService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +22,10 @@ public class OrderController {
     private final OrderService orderService;
     private final OrderMapper orderMapper;
 
+    private final MaterialService materialService;
+
     @GetMapping("")
+    @Transactional
     public List<OrderDto> findAllOrders() {
         return orderMapper.toDtos(orderService.findAll());
     }
@@ -36,13 +42,20 @@ public class OrderController {
 
 
     @PostMapping("")
-    public OrderDto addNewOrder(@RequestBody OrderDto materialDto) {
-        Order material = orderMapper.toEntity(materialDto);
+    public OrderDto addNewOrder(@RequestBody OrderRequest request) {
+        Order material = orderMapper.toEntity(request);
+        material.getOrderItems().forEach(orderItem -> materialService.findById(orderItem.getMaterial().getMaterialId()));
         return orderMapper.toDto(orderService.save(material));
     }
 
     @PostMapping("/{orderId}/cancel")
     public void cancelOrder(@PathVariable String orderId) {
-        orderService.deleteById(UUID.fromString(orderId));
+        Order order = orderService.findById(UUID.fromString(orderId));
+        if (order.isPending()) {
+            order.setStatus(OrderStatus.CANCELED);
+            orderService.save(order);
+        } else {
+            throw new ApplicationException("Cannot cancel this order.");
+        }
     }
 }

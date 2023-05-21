@@ -13,7 +13,7 @@ import java.util.Date;
 @Data
 public class OrderItemDto implements Serializable {
     private final Long id;
-    private final Long materialMaterialId;
+    private final Long materialId;
     private final String materialName;
     private final String materialDescription;
     private final BigDecimal materialPrice;
