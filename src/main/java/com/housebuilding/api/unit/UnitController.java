@@ -1,6 +1,5 @@
 package com.housebuilding.api.unit;
 
-import com.housebuilding.api.Route;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import static com.housebuilding.api.Route.ROOT;
+import static com.housebuilding.api.Route.UNIT_URI;
+import static com.housebuilding.api.Route.V1_URI;
+
 @RestController
 @AllArgsConstructor
-@RequestMapping(Route.UNIT_URI)
+@RequestMapping(ROOT + V1_URI + UNIT_URI)
 public class UnitController {
     private final UnitService unitService;
     private final UnitMapper unitMapper;

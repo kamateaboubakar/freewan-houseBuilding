@@ -1,10 +1,5 @@
 package com.housebuilding.api.category;
 
-import com.housebuilding.api.Route;
-import com.housebuilding.api.category.Category;
-import com.housebuilding.api.category.CategoryDto;
-import com.housebuilding.api.category.CategoryMapper;
-import com.housebuilding.api.category.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,8 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import static com.housebuilding.api.Route.CATEGORY;
+import static com.housebuilding.api.Route.ROOT;
+import static com.housebuilding.api.Route.V1_URI;
+
 @RestController
-@RequestMapping(Route.CATEGORY)
+@RequestMapping(ROOT + V1_URI + CATEGORY)
 @RequiredArgsConstructor
 public class CategoryController {
 
@@ -39,7 +38,7 @@ public class CategoryController {
     @PostMapping("")
     public CategoryDto addNewCategory(@RequestBody CategoryDto categoryDto) {
         Category category = categoryMapper.toEntity(categoryDto);
-        if(categoryDto.categoryId() == null) {
+        if (categoryDto.categoryId() == null) {
             category.setParent(null);
         }
         return categoryMapper.toDto(categoryService.save(category));

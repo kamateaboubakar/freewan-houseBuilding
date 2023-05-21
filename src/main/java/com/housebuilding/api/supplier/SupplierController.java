@@ -14,8 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.UUID;
 
+import static com.housebuilding.api.Route.ROOT;
+import static com.housebuilding.api.Route.SUPPLIER;
+import static com.housebuilding.api.Route.V1_URI;
+
 @RestController
-@RequestMapping(Route.SUPPLIER)
+@RequestMapping(ROOT + V1_URI + SUPPLIER)
 @RequiredArgsConstructor
 public class SupplierController {
 

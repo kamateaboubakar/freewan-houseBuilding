@@ -1,6 +1,5 @@
 package com.housebuilding.api.order;
 
-import com.housebuilding.api.Route;
 import com.housebuilding.api.exception.ApplicationException;
 import com.housebuilding.api.material.MaterialService;
 import lombok.RequiredArgsConstructor;
@@ -15,8 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.UUID;
 
+import static com.housebuilding.api.Route.ORDER;
+import static com.housebuilding.api.Route.ROOT;
+import static com.housebuilding.api.Route.V1_URI;
+
 @RestController
-@RequestMapping(name = Route.ORDER)
+@RequestMapping(ROOT + V1_URI + ORDER)
 @RequiredArgsConstructor
 public class OrderController {
     private final OrderService orderService;

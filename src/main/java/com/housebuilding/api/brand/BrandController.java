@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import static com.housebuilding.api.Route.BRAND;
+import static com.housebuilding.api.Route.ROOT;
+import static com.housebuilding.api.Route.V1_URI;
+
 @RestController
-@RequestMapping(Route.BRAND)
+@RequestMapping(ROOT + V1_URI +BRAND)
 @RequiredArgsConstructor
 public class BrandController {
 

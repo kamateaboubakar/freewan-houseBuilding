@@ -1,6 +1,5 @@
 package com.housebuilding.api.material;
 
-import com.housebuilding.api.Route;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,8 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import static com.housebuilding.api.Route.MATERIAL;
+import static com.housebuilding.api.Route.ROOT;
+import static com.housebuilding.api.Route.V1_URI;
+
 @RestController
-@RequestMapping(Route.MATERIAL)
+@RequestMapping(ROOT + V1_URI + MATERIAL)
 @RequiredArgsConstructor
 public class MaterialController {
 
