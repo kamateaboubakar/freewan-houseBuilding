@@ -41,6 +41,9 @@ public class CategoryController {
         Category category = categoryMapper.toEntity(categoryDto);
         if (categoryDto.getCategoryId() == null) {
             category.setParent(null);
+        }else {
+            Category parent = categoryService.findById(categoryDto.getParentCategoryId());
+            category.setParent(parent);
         }
         return categoryMapper.toDto(categoryService.save(category));
     }
