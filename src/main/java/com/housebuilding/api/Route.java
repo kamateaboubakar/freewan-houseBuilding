@@ -8,6 +8,7 @@ public class Route {
     public static final String ORDER = "/orders";
     public static final String ROOT = "/api";
     public static final String V1_URI = "/v1";
+    public static final String CART = "/cart";
 
     private Route() {
     }
